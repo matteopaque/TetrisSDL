@@ -1,4 +1,4 @@
 # Tetris in C++
-University application
+University application.
 
-The main.cpp file has the source code
+The source code is in the main.cpp file.
