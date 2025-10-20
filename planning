@@ -1,0 +1,84 @@
+
+Save time by delaying gameStates until last, but construct code to make it easy to switch
+
+Use sdl textures and renderer this time
+
+Do not use the same sdlWrapper class I made last time
+That sucked
+
+I have to deal with time, collision, and dynamic level
+Start by making it turn based with a counter
+Define all important number and type systems with typedefs
+
+Create struct for render coordinate system and embed board location in a piece class
+Turn dynamic piece into static block on land, dynamic pieces have internal positions and static blocks are stored in a board class
+
+Use a single sdl texture for the individual piece, and figure out how to color it in order to create multiple piece colors
+
+find a piece rotation convention online
+
+implement scoreboard after main game is done
+
+data structure for board?
+	array
+	linked list
+needs to be able to remove bottom pieces easily
+probably array with move semantics
+Maybe array of arrays, to optimize collision and piece moving
+array of array of typedef of colors and existence
+
+board is 10x20
+
+old school style tetris, no hold or fast dropping, 3 piece queue
+
+How should dynamic pieces store the coordinates of their tiles?
+	using ordered pairs in a position class
+	using ordered pairs in a position struct (no invariant guards)
+>>	using a smaller 2d array of booleans
+
+pieces should store piece position and piece arrangement seperately
+
+should piece type be inherited class or enum variable?
+	probably enum variable to reduce amount of classes
+	but then there would need to be a 4x4 and 3x3 array of booleans
+	could use 4x4 and ignore space, but it would be a waste of memory
+>>	use 4x4 and optimize if needed later, for 3x3 pieces ignore the 4th row and column for rotational translations
+
+should translation system be lookup or mathematical?
+	lookup would take too long, reassign values with reasigning the boolean values of certain spaces
+
+sdl features needed:
+keyboard input
+textures
+colored textures
+collision implementation
+
+struct list:
+point: ordered pair for coordinates
+
+constant variables:
+screen width, height
+constexpr function to get the point of a certain tile on the board
+
+Classes list:
+sdl: for init and deInit, just for raii, do not use to cover sdl functions
+Window: creates window and allows update and surface grabbing, destroys on deInit
+Texture: creates from surface on creation and frees window on destroy;	
+EventHandler: calls functions to certain classes for an event to change state;
+Board: stores 2d array of typedefs for piece existence and colors, allows function
+to convert piece object into the static array, and render a piece, can check if piece class is colliding
+with static tile
+PieceQueue: shows next pieces and decides how to give the next piece
+Piece: stores a 2d array of booleans for arrangement, the position in the space,
+the piece type and colors, and functions to rotate it. includes a step function for fall and event move
+TimeController: controls game speed, calls steps to certain classes to advance position
+
+
+Pieces list:
+
+O piece
+L piece
+J piece
+T piece
+S piece
+Z piece

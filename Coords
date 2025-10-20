@@ -1,0 +1,9 @@
+Tetris board coords:
+full: 480x640
+
+
+board: (150,150), (350,550) 200x400
+piece: 20x20
+info: (20,200), (120,250) 100x50
+
+
